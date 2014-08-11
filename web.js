@@ -1,25 +1,67 @@
 var express = require('express');
+var path = require('path');
+var favicon = require('static-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var hbs = require('hbs');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash 	 = require('connect-flash');
+var logger = require('morgan');
+var session      = require('express-session');
+
+
+
+
+/*
 var fs = require('fs');
 var hbs = require('hbs');
-var Quote = require('./models/Quote.js');
+//var Quote = require('./models/Quote.js');
 var routes = require('./routes');
 var moment = require('moment');
+var mongoose = require('mongoose');
+var passport = require('passport');
+
+*/
 
 var app = express();
-app.use(express.logger());
+//app.use(express.logger());
 
-app.configure(function(){
-	app.use(express.static(__dirname + '/public'));
-    app.use(express.bodyParser());
-    app.use(express.cookieParser());
-	app.use(express.session({secret: '1234567890QWERTY'}));
-});
+var configDB = require('./config/database.js');
+db = mongoose.connect(configDB.url); // connect to our database
+
+
+require('./config/passport')(passport); // pass passport for configuration
+
+var Restaurant = require('./models/Restaurant.js');
+
+app.use(express.static(path.join(__dirname, 'public')));
+	app.use(logger('dev')); // log every request to the console
+	app.use(cookieParser()); // read cookies (needed for auth)
+    app.use(bodyParser());
+    app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded());
+
+	// required for passport
+	app.use(session({ 	secret: 'ilovescotchscotchyscotchscotch', // session secret
+             			cookie:{_expires : 60000000} // time im ms
+              		})); 
+	app.use(passport.initialize());
+	app.use(passport.session()); // persistent login sessions
+	app.use(flash()); // use connect-flash for flash messages stored in session
+
 
 var blogEngine = require('./dailyquotare');
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
-app.use(express.bodyParser());
+app.use(bodyParser());
 
+//Make our db accessible to our router
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 hbs.registerHelper('prettifyDate', function(unformated) {
   return moment(unformated).format('DD.MM.YYYY');
@@ -29,57 +71,9 @@ hbs.registerHelper('datehtmlformated', function(unformated) {
   return moment(unformated).format('YYYY-MM-DD');
 });
 
-var restaurants=[
-					{	
-						name:"Bärengasse",
-						menu:
-							[
-								{
-									name:"RAVIOLI „BÄRENGASSE“",
-									description:"Mit Rindsfilet und Gemüse gefüllt, dazu Salbeibutter und Parmesan",
-									price:33
-								},
-								{
-									name:"GEMÜSERISOTTO",
-									description:"Weissweinrisotto mit grilliertem, mediterranem Gemüse",
-									price:24
-								},
-							]
-					}, 
-					{	
-						name:"Bohemia",
-						menu:
-							[
-								{
-									name:"Beetroot Potato Salad“",
-									description:"in Salz gebackene Randen, Kartoffeln, Chornichos und Schalotten",
-									price:19
-								},
-								{
-									name:"Shrimps Fettuccine",
-									description:"Fettuccine mit Black Tiger Crevetten, Ofentomaten, Rosmarin, Thymian und Dill",
-									price:28
-								},
-							]
-					},
-					{	
-						name:"Aura",
-						menu:
-							[
-								{
-									name:"Beef burger",
-									description:"mit Kabissalat und gebackenen Kartoffelecken",
-									price:32
-								},
-								{
-									name:"Grillierte Black Tiger Krevetten",
-									description:"mit Kräutern und Knoblauch",
-									price:42
-								},
-							]
-					}
-				];
 
+
+/*
 app.get('/', function(req, res){
 
 	req.session.user={firstname:"Thomas",lastname:"Stoeckel"};
@@ -93,7 +87,7 @@ app.get('/definereservationrequest', function(req, res){
 	if (req.session.date != "" && req.session.restime != "" && req.session.guest != ""){
 
 	}
-	*/
+	*//*
 	console.log(req.session.date);
 
 	res.render('definereservationrequest',{
@@ -163,7 +157,9 @@ app.get('/orderconfirmation', function(req, res){
 		restaurant:req.session.restaurantname
 	});
 });
-
+*/
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 /*
 app.get('/', function(req, res){
 	 res.redirect('/showroom');

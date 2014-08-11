@@ -1,0 +1,116 @@
+<div class="row">
+	<div class="col-md-5">
+		<div class="bs-example" id="restaurantList">
+		    <table class="table" >
+		    	<thead>
+		        	<tr>
+		          		<th>#</th>
+		          		<th>Name</th>
+		           		<th>Details</th>
+		           		<th>Löschen</th>
+		        	</tr>
+		      	</thead>
+		    	<tbody>
+		     	</tbody>
+		    </table>
+		</div>
+		<p>
+			<button type="submit" class="btn btn-primary" id="btnAddRestaurantButton">Neues Restaurant</button>
+		</p>
+	</div>
+	<div class="col-md-7 inputMask" id="restaurantInputMask">
+		<div>
+  			<form role="form" id="addRestaurant" method="post" action="/restaurant">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Restaurantname</label>
+					<input type="text" class="form-control" id="inputName" placeholder="Enter Name">
+				</div>
+				<div class="form-group">
+			    	<label for="exampleInputEmail1">
+			    		Adresse
+			    	</label>
+			    	<br>
+			    	<label for="exampleInputEmail1">
+			    		Strasse
+			    	</label>
+			    	<input type="text" class="form-control" id="inputStreet" placeholder="Enter Name">
+			    	<label for="exampleInputEmail1">
+			    		Nummer
+			    	</label>
+			    	<input type="text" class="form-control" id="inputStreetnr" placeholder="Enter Name">
+			    	<label for="exampleInputEmail1">
+			    		PLZ
+			    	</label>
+			    	<input type="text" class="form-control" id="inputZip" placeholder="Enter Name">
+			    	<label for="exampleInputEmail1">
+			    		Ort
+			    	</label>
+			    	<input type="text" class="form-control" id="inputCity" placeholder="Enter Name">
+			    	<label for="exampleInputEmail1">
+			    		URL
+			    	</label>
+			    	<input type="text" class="form-control" id="inputURL" placeholder="Enter Name">
+				</div>
+			 	
+    			<label>Öffnungszeiten</label>
+    			<br>
+    			<label>Von</label>
+    			<input type="text" class="form-control" id="inputOpenH" placeholder="hh">
+    			<input type="text" class="form-control" id="inputOpenM" placeholder="mm">
+    			<label>Bis</label>
+    			<input type="text" class="form-control" id="inputCloseH" placeholder="hh">
+    			<input type="text" class="form-control" id="inputCloseM" placeholder="mm">
+    				
+   					<button type="submit" class="btn btn-default" id="btnAddRestaurant">
+   						Speichern
+   					</button>
+					<button type="submit" class="btn btn-default" id="btnUpdateRestaurant" style="display:none;">
+						Speichern
+					</button>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-7 detailBox" id="restaurantDetailBox">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<b>
+					<div id="restaurantInfoName" class="restaurantInfo">
+					</div>
+				</b>
+			</div>
+			<div class="panel-body">
+				<label>
+					Strasse
+				</label>
+				<div id='restaurantInfoStreet' class="infoOutput"></div>
+				<label>
+					Ort
+				</label>
+				<div id='restaurantInfoCity' class="infoOutput"></div>
+				<label>
+					Land
+				</label>
+				<div id='restaurantInfoCountry' class="infoOutput"></div>
+				<label>
+					URL
+				</label>
+				<div id='restaurantInfoURL' class="infoOutput"></div>
+				<label>
+					Öffnungszeiten
+				</label>
+				<div id='restaurantInfoOpeninghours' class="infoOutput"></div>
+
+				<b>
+					Erstellt
+				</b>
+				<div id="restaurantInfoCreated" class="restaurantInfo infoOutput">
+				</div>
+				<br>
+				<button class="btn btn-primary" id="btnEditRestaurantButton">
+					Bearbeiten
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+

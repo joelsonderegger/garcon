@@ -38,19 +38,8 @@ MyQuote.find({
 
 // Add user to database
 function addQuote(text, author, callback) {
-  var instance = new MyQuote();
-  instance.text = text
-  instance.author = author;
-  instance.isPublished = true;
-  instance.likes = 0;
-  instance.save(function (err) {
-    if (err) {
-      callback(err);
-    }
-    else {
-      callback(null, instance);
-    }
-  });
+  var name = req.body.name;
+  console.log(name);
 }
 
 

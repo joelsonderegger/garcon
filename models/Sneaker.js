@@ -24,10 +24,10 @@ module.exports.findAllSneakerPopular = findAllSneakerPopular;
 // Find a single movie by name.
 function findOne(idxd, callback) {
   console.dir(idxd);
-  MySneaker.findOne({ _id: idxd }, function(err, sneaker) {
+  MySneaker.findOne({ _id: idxd }, function(err, restaurant) {
     if (err) return console.error(err);
-    console.dir(sneaker);
-    callback(sneaker);
+    console.dir(restaurant);
+    callback(restaurant);
 });
 }
 

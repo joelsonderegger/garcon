@@ -7,9 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "express": "~3.3.4",
+    "express": "~4.2.0",
+    "morgan": "~1.0.0",
+        "static-favicon": "~1.0.0",
+        "cookie-parser": "~1.0.1",
+        "express-session": "*",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
     "hbs": "*",
-    "mongoose": "2.6.5"
+    "mongoose": "*",
+    "passport" : "~0.1.17",     
+    "passport-local" : "~0.1.6",
+    "connect-flash" : "~0.1.1",   
+    "bcrypt-nodejs" : "latest"
   },
   "engines": {
     "node": "0.10.x",

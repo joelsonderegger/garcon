@@ -1,0 +1,136 @@
+<div class="row">
+	<div class="col-md-5">
+		<div class="bs-example" id="memberList">
+		    <table class="table">
+		    	<thead>
+		        	<tr>
+		          		<th>Member ID</th>
+		          		<th>Vornamen</th>
+		           		<th>Nachname</th>
+		        	</tr>
+		      	</thead>
+		    	<tbody>
+		     	</tbody>
+		    </table>
+		</div>
+		<p>
+			<button type="submit" class="btn btn-primary" id="btnAddMemberButton">Neuer Member</button>
+		</p>
+	</div>
+	<div class="col-md-7 inputMask" id="memberInputMask">
+		<div>
+  			<form role="form" id="addMember" method="post" action="/member">
+				<div class="form-group">
+					<label>Vorname</label>
+					<input type="text" class="form-control" id="inputFirstname" placeholder="">
+					<label>2. Vorname</label>
+					<input type="text" class="form-control" id="inputMiddleName" placeholder="">
+					<label>
+						Nachname
+					</label>
+					<input type="text" class="form-control" id="inputLastname">
+					<label>
+						Geburtstag
+					</label>
+					<input type="text" class="form-control" id="inputBirthdayDay">
+					<input type="text" class="form-control" id="inputBirthdayMonth">
+					<input type="text" class="form-control" id="inputBirthdayYear">
+					<label>
+						Strasse
+					</label>
+					<input type="text" class="form-control" id="inputStreetName">
+					<label>
+						Strassen Nr.
+					</label>
+					<input type="text" class="form-control" id="inputStreetNr">
+					<label>
+						PLZ
+					</label>
+					<input type="text" class="form-control" id="inputPLZ">
+					<label>
+						Ort
+					</label>
+					<input type="text" class="form-control" id="inputCity">
+					<label>
+						Land
+					</label>
+					<input type="text" class="form-control" id="inputCountry">
+					<label>
+						E-Mail
+					</label>
+					<input type="text" class="form-control" id="inputEmail">
+					<button type="submit" class="btn btn-default" id="btnAddMember">
+   						Speichern
+   					</button>
+					<button type="submit" class="btn btn-default" id="btnUpdateMember" style="display:none;">
+						Änderungen speichern
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-7 detailBox" id="memberDetailBox">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<b>
+					<div id="memberInfoHeading">
+					</div>
+				</b>
+			</div>
+			<div class="panel-body">
+				<div>
+					Vornamen
+				</div>
+				<div>
+					<div id="memberInfoFirstname">
+				</div>
+				<div>
+					2. Vornamen
+				</div>
+				<div>
+					<div id="memberInfoSecondname">
+				</div>
+				<div>
+					Lastname
+				</div>
+				<div>
+					<div id="memberInfoLastname">
+				</div>
+				<div>
+					Birthday
+				</div>
+				<div>
+					<div id="memberInfoBirthday">
+				</div>
+				<div>
+					Strasse
+				</div>
+				<div>
+					<div id="memberInfoStreet">
+				</div>
+				<div>
+					Ort
+				</div>
+				<div>
+					<div id="memberInfoCity">
+				</div>
+				<div>
+					Land
+				</div>
+				<div>
+					<div id="memberInfoCountry">
+				</div>
+				<div>
+					E-Mail
+				</div>
+				<div>
+					<div id="memberInfoEmail">
+				</div>
+				<button class="btn btn-primary" id="btnEditMemberButton">
+					Bearbeiten
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
