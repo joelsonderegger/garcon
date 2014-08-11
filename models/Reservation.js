@@ -17,7 +17,7 @@ module.exports.findAllReservation = findAllReservation;
 
 
 // Find Reservations
-function findAllRestaurants(callback) {
+function findAllReservation(callback) {
   Reservation.find(function(err, reservations) {
     if (err) return console.error(err);
     callback(reservations);
