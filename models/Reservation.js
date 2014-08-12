@@ -13,7 +13,7 @@ var Reservation = db.mongoose.model('Reservation', ReservationSchema);
 module.exports.addReservation = addReservation;
 module.exports.removeReservation = removeReservation;
 module.exports.confirmReservation = confirmReservation;
-module.exports.findAllReservation = findAllReservation;
+module.exports.findAllReservations = findAllReservation;
 
 
 // Find Reservations

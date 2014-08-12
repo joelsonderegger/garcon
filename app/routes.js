@@ -36,6 +36,11 @@ module.exports = function(app, passport) {
 		res.redirect('/');
 	});
 
+	//LOGOUT
+	app.get('/admin/logout', function(req, res) {
+		res.redirect('/');
+	});
+
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
 		successRedirect : '/profile', // redirect to the secure profile section
@@ -50,12 +55,46 @@ module.exports = function(app, passport) {
 		failureFlash : true // allow flash messages
 	}));
 
+
+	// Admin
+	app.get('/admin', function(req, res) {
+		res.redirect('/admin/dashboard');
+	});
+
 	//RESTAURANT SECTION
 	app.get('/admin/restaurants', function(req, res) {
 		res.render('restaurant', {
+			title: 'Restaurants',
+  			layout: 'layout/admin'
 		});
 	});
 
+	/* GET Member Section */
+	app.get('/admin/members', function(req, res) {
+		res.render('members', {
+			title: 'Members',
+  			layout: 'layout/admin'
+		});
+	});
+
+	app.get('/admin/dashboard', function(req,res){
+		res.render('dashboard', {
+			title: 'Dashboard',
+  			layout: 'layout/admin'
+		});
+	});
+
+	/* RESERVATIONS */
+	app.get('/admin/reservations', function(req,res){
+		res.render('reservations', {
+			title: 'Reservations',
+  			layout: 'layout/admin'
+		});
+	});
+
+
+
+	// API
 	app.post('/addrestaurant', function(req, res){
 		var newrestaurant = req.body;
 
@@ -81,7 +120,6 @@ module.exports = function(app, passport) {
 	app.get('/restaurantlist', function(req, res){
 		Restaurant.findAllRestaurants(function(p) {
     		res.json(p);
-				
 		});
 	});
 
@@ -101,11 +139,7 @@ module.exports = function(app, passport) {
 		});
 	});
 	
-	/* GET Member Section */
-	app.get('/admin/members', function(req, res) {
-		res.render('members', {
-		});
-	});
+	
 
 	/* GET Memberlist */
 	app.get('/memberlist', function(req, res){
@@ -116,7 +150,7 @@ module.exports = function(app, passport) {
 	});
 
 	/* GET Member Information */
-	app.get('/member/:id', function(req, res){
+	app.get('/api/members/:id', function(req, res){
 		var restaurantid = req.params.id;
 		Member.findMember(restaurantid, function(p) {
 			res.json(p);
@@ -143,32 +177,23 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	app.post('/updatemember/:id', function(req, res){
+	app.post('/api/updatemember/:id', function(req, res){
 	
 		var member = req.body;
 		member.id = req.params.id;
 
-  		Member.updatemMember(member, function(err, restaurant) {
+		console.log(member);
+
+  		Member.updateMember(member, function(err, member) {
     		if (err) throw err;
     		
 			res.json(true);
   		});
 	});
 
-	app.get('/admin/dashboard', function(req,res){
+	
 
-		res.render('dashboard', {
-		});
-
-	});
-
-	/* RESERVATIONS */
-	app.get('/admin/reservations', function(req,res){
-		res.render('reservations', {
-		});
-	});
-
-	app.get('/reservations', function(req,res){
+	app.get('/api/reservations', function(req,res){
 		Reservation.findAllReservations(function(reservationslist){
 			res.json(reservationslist);
 		});
